@@ -1,22 +1,20 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { usePathname } from 'next/navigation';
-import gsap from 'gsap-trial/dist/gsap';
-import { ScrollTrigger } from 'gsap-trial/dist/ScrollTrigger';
-import { ScrollSmoother } from 'gsap-trial/dist/ScrollSmoother';
-import { Inter } from 'next/font/google';
+import { useRef } from "react";
+import { usePathname } from "next/navigation";
+import gsap from "gsap-trial/dist/gsap";
+import { ScrollTrigger } from "gsap-trial/dist/ScrollTrigger";
+import { ScrollSmoother } from "gsap-trial/dist/ScrollSmoother";
+import { Inter } from "next/font/google";
+import Header from "../components/Header";
+import useIsomorphicLayoutEffect from "../helpers/isomorphicEffect";
+import "./globals.css";
 
-import Header from '../components/Header';
-import useIsomorphicLayoutEffect from '../helpers/isomorphicEffect';
+const inter = Inter({ subsets: ["latin"] });
 
-import './globals.css';
-
-const inter = Inter({ subsets: ['latin'] });
-
-export default function RootLayout({ children }) {
-  const smoother = useRef();
-  const ctx = useRef();
+export default function RootLayout({ children }: any) {
+  const smoother = useRef<ScrollSmoother | null>(null);
+  const ctx = useRef<ReturnType<typeof gsap.context> | null>(null);
   const pathname = usePathname();
 
   useIsomorphicLayoutEffect(() => {
@@ -29,7 +27,7 @@ export default function RootLayout({ children }) {
       });
     });
 
-    return () => ctx.current.revert();
+    return () => ctx.current?.revert();
   }, [pathname]);
 
   return (

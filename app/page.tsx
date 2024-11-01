@@ -13,7 +13,7 @@ if (typeof window !== "undefined") {
 }
 
 const HomePage = () => {
-  const container = useRef();
+  const container = useRef(null);
   useGSAP(
     () => {
       ScrollTrigger.create({
